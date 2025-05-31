@@ -1,4 +1,4 @@
-package com.gildedrose
+package com.gildedrose.application
 
 fun main(args: Array<String>) {
 

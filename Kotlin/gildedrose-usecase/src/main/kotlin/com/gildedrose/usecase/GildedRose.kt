@@ -1,4 +1,4 @@
-package com.gildedrose
+package com.gildedrose.usecase
 
 class GildedRose(val items: List<Item>) {
 
