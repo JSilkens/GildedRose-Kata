@@ -1,4 +1,7 @@
-package com.gildedrose
+package com.gildedrose.application
+
+import com.gildedrose.domain.Item
+import com.gildedrose.usecase.GildedRose
 
 fun main(args: Array<String>) {
 

@@ -1,4 +1,4 @@
-package com.gildedrose
+package com.gildedrose.domain
 
 open class Item(
     var name: String,
