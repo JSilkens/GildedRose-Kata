@@ -1,6 +1,6 @@
-package com.gildedrose
+package com.gildedrose.domain
 
-open class Item(
+data class Item(
     var name: String,
     var sellIn: Int,
     var quality: Int,

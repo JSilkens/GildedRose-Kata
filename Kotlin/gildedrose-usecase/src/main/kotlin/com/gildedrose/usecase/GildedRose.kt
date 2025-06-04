@@ -1,5 +1,7 @@
 package com.gildedrose.usecase
 
+import com.gildedrose.domain.Item
+
 class GildedRose(val items: List<Item>) {
 
     fun updateQuality() {
