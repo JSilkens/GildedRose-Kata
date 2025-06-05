@@ -8,7 +8,7 @@ fun main(args: Array<String>) {
     println("OMGHAI!")
 
     val items = listOf(
-        createItem("E+5 Dexterity Vest", 10, 20), //
+        createItem("+5 Dexterity Vest", 10, 20), //
             createItem("Aged Brie", 2, 0), //
             createItem("Elixir of the Mongoose", 5, 7), //
             createItem("Sulfuras, Hand of Ragnaros", 0, 80), //
