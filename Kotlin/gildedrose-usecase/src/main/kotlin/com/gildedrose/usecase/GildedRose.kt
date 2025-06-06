@@ -1,60 +1,34 @@
 package com.gildedrose.usecase
 
+import com.gildedrose.domain.AgedBrie
+import com.gildedrose.domain.BackstagePass
+import com.gildedrose.domain.Conjured
 import com.gildedrose.domain.Item
+import com.gildedrose.domain.Sulfuras
+import com.gildedrose.usecase.quality.AgedBrieQualityUpdateUseCase
+import com.gildedrose.usecase.quality.BackstagePassQualityUpdateUseCase
+import com.gildedrose.usecase.quality.ConjuredQualityUpdateUseCase
+import com.gildedrose.usecase.quality.StandardItemQualityUpdateUseCase
+import com.gildedrose.usecase.quality.SulfurasQualityUpdateUseCase
 
 class GildedRose(val items: List<Item>) {
+    private val standardUpdate = StandardItemQualityUpdateUseCase()
+    private val conjuredUpdate = ConjuredQualityUpdateUseCase()
+    private val agedBrieUpdate = AgedBrieQualityUpdateUseCase()
+    private val backstagePassUpdate = BackstagePassQualityUpdateUseCase()
+    private val sulfurasUpdate = SulfurasQualityUpdateUseCase()
 
     fun updateQuality() {
-        for (i in items.indices) {
-            if (items[i].name != "Aged Brie" && items[i].name != "Backstage passes to a TAFKAL80ETC concert") {
-                if (items[i].quality > 0) {
-                    if (items[i].name != "Sulfuras, Hand of Ragnaros") {
-                        items[i].quality = items[i].quality - 1
-                    }
-                }
-            } else {
-                if (items[i].quality < 50) {
-                    items[i].quality = items[i].quality + 1
-
-                    if (items[i].name == "Backstage passes to a TAFKAL80ETC concert") {
-                        if (items[i].sellIn < 11) {
-                            if (items[i].quality < 50) {
-                                items[i].quality = items[i].quality + 1
-                            }
-                        }
-
-                        if (items[i].sellIn < 6) {
-                            if (items[i].quality < 50) {
-                                items[i].quality = items[i].quality + 1
-                            }
-                        }
-                    }
-                }
+        items.forEach { item ->
+            val updateStrategy = when (item) {
+                is Conjured -> conjuredUpdate
+                is AgedBrie -> agedBrieUpdate
+                is BackstagePass -> backstagePassUpdate
+                is Sulfuras -> sulfurasUpdate
+                else -> standardUpdate
             }
-
-            if (items[i].name != "Sulfuras, Hand of Ragnaros") {
-                items[i].sellIn = items[i].sellIn - 1
-            }
-
-            if (items[i].sellIn < 0) {
-                if (items[i].name != "Aged Brie") {
-                    if (items[i].name != "Backstage passes to a TAFKAL80ETC concert") {
-                        if (items[i].quality > 0) {
-                            if (items[i].name != "Sulfuras, Hand of Ragnaros") {
-                                items[i].quality = items[i].quality - 1
-                            }
-                        }
-                    } else {
-                        items[i].quality = items[i].quality - items[i].quality
-                    }
-                } else {
-                    if (items[i].quality < 50) {
-                        items[i].quality = items[i].quality + 1
-                    }
-                }
-            }
+            updateStrategy.invoke(item)
         }
     }
-
 }
 
