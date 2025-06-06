@@ -3,7 +3,7 @@
 ## Run the Text Fixture from Command-Line
 
 ```bash
-mvn exec:java -Dexec.mainClass="com.gildedrose.TexttestFixtureKt" -Dexec.args="30"
+mvn exec:java -Dexec.mainClass="com.gildedrose.application.TexttestFixtureKt" -Dexec.args="30"
 ```
 
 ### Specify Number of Days
@@ -11,7 +11,7 @@ mvn exec:java -Dexec.mainClass="com.gildedrose.TexttestFixtureKt" -Dexec.args="3
 For example, 10 days:
 
 ```bash
-mvn exec:java -Dexec.mainClass="com.gildedrose.TexttestFixtureKt" -Dexec.args="10"
+mvn exec:java -Dexec.mainClass="com.gildedrose.application.TexttestFixtureKt" -Dexec.args="10"
 ```
 
 You should make sure the Maven commands shown above work when you execute them in a terminal before trying to use TextTest (see below).

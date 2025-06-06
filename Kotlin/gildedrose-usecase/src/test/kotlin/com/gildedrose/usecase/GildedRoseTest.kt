@@ -1,6 +1,7 @@
 package com.gildedrose.usecase
 
 import com.gildedrose.domain.factory.createItem
+import com.gildedrose.domain.validation.Outcome
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -11,7 +12,7 @@ class GildedRoseTest {
     @Test
     fun `GIVEN a regular item WHEN updating quality THEN quality and sellIn decrease by one`() {
         //GIVEN
-        val items = listOf(createItem("regular item", 10, 20))
+        val items = listOf((createItem("regular item", 10, 20) as Outcome.Success).item)
         val app = GildedRose(items)
 
         //WHEN
@@ -26,7 +27,7 @@ class GildedRoseTest {
     @Test
     fun `GIVEN a regular item with sellIn zero WHEN updating quality THEN quality degrades twice as fast`() {
         // GIVEN
-        val items = listOf(createItem("regular item", 0, 20))
+        val items = listOf((createItem("regular item", 0, 20) as Outcome.Success).item)
         val app = GildedRose(items)
 
         // WHEN
@@ -41,7 +42,7 @@ class GildedRoseTest {
     @Test
     fun `GIVEN a regular item with zero quality WHEN updating quality THEN quality remains zero`() {
         // GIVEN
-        val items = listOf(createItem("regular item", 5, 0))
+        val items = listOf((createItem("regular item", 5, 0) as Outcome.Success).item)
         val app = GildedRose(items)
 
         // WHEN
@@ -55,7 +56,7 @@ class GildedRoseTest {
     @Test
     fun `GIVEN Aged Brie WHEN updating quality THEN quality increases`() {
         // GIVEN
-        val items = listOf(createItem("Aged Brie", 5, 10))
+        val items = listOf((createItem("Aged Brie", 5, 10) as Outcome.Success).item)
         val app = GildedRose(items)
 
         // WHEN
@@ -69,7 +70,7 @@ class GildedRoseTest {
     @Test
     fun `GIVEN an item at max quality WHEN updating quality THEN quality does not exceed 50`() {
         // GIVEN
-        val items = listOf(createItem("Aged Brie", 5, 50))
+        val items = listOf((createItem("Aged Brie", 5, 50) as Outcome.Success).item)
         val app = GildedRose(items)
 
         // WHEN
@@ -83,7 +84,7 @@ class GildedRoseTest {
     @Test
     fun `GIVEN Sulfuras WHEN updating quality THEN quality and sellIn do not change`() {
         // GIVEN
-        val items = listOf(createItem("Sulfuras, Hand of Ragnaros", 5, 80))
+        val items = listOf((createItem("Sulfuras, Hand of Ragnaros", 5, 80) as Outcome.Success).item)
         val app = GildedRose(items)
 
         // WHEN
@@ -111,7 +112,7 @@ class GildedRoseTest {
         description: String
     ) {
         // GIVEN
-        val items = listOf(createItem("Backstage passes to a TAFKAL80ETC concert", sellIn, quality))
+        val items = listOf((createItem("Backstage passes to a TAFKAL80ETC concert", sellIn, quality) as Outcome.Success).item)
         val app = GildedRose(items)
 
         // WHEN
