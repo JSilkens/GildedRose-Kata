@@ -35,15 +35,14 @@ class ValidateQualityTest {
     }
 
     @Test
-    fun `GIVEN a conjured item with quality greater than 50 WHEN validateQuality is called THEN returns Success`() {
+    fun `GIVEN a conjured item with quality greater than 50 WHEN validateQuality is called THEN returns Failure`() {
         // GIVEN
         val item = Conjured("Conjured Mana Cake", 5, 80)
         // WHEN
         val result = validateQuality(item)
         // THEN
         assertThat(result)
-            .isInstanceOf(Outcome.Success::class.java)
-            .extracting { (it as Outcome.Success).item }
-            .isEqualTo(item)
+            .isInstanceOf(Outcome.Failure::class.java)
+
     }
 }
