@@ -1,4 +1,5 @@
 import com.gildedrose.domain.AgedBrie
+import com.gildedrose.domain.BackstagePass
 import com.gildedrose.domain.Conjured
 import com.gildedrose.domain.Item
 import com.gildedrose.domain.Sulfuras
@@ -7,7 +8,26 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 class ItemFactoryTests {
+@Test
+    fun `GIVEN item with name containing BACKSTAGE PASS WHEN create THEN item of type BackstagePass created`() {
+        val item = createItem("BACKSTAGE PASSES TO A TAFKAL80ETC CONCERT", 15, 20)
 
+        assertTrue(item is BackstagePass)
+    }
+
+    @Test
+    fun `GIVEN item with name containing backstage pass WHEN create THEN item of type BackstagePass created`() {
+        val item = createItem("backstage passes to a tafkal80etc concert", 15, 20)
+
+        assertTrue(item is BackstagePass)
+    }
+
+    @Test
+    fun `GIVEN item with name containing Backstage Pass WHEN create THEN item of type BackstagePass created`() {
+        val item = createItem("Backstage Passes to a TAFKAL80ETC concert", 15, 20)
+
+        assertTrue(item is BackstagePass)
+    }
 
     @Test
     fun `GIVEN item with name containing SULFURAS WHEN create THEN item of type Sulfuras created`() {
